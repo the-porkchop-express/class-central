@@ -129,6 +129,17 @@ class DefaultController extends Controller {
 
         }
 
+        // MOOC Report posts
+        $moocReport = $this->get('mooc_report');
+        $newestPosts = array();
+        try{
+            $newestPosts = $moocReport->getPosts();
+        }
+        catch(\Exception $e)
+        {
+
+        }
+
         return $this->render('ClassCentralSiteBundle:Default:index.html.twig', array(
                 'page' => 'home',
                 'listTypes' => UserCourse::$lists,
@@ -140,7 +151,8 @@ class DefaultController extends Controller {
                 'uc' => $uc,
                 'ucCount' => $ucCount,
                 'recommendedCourses' => $recommendedCourses,
-                'meetYourNextCourse' => $meetYourNextCourse
+                'meetYourNextCourse' => $meetYourNextCourse,
+                'newestPosts' => $newestPosts
                ));
     }
 

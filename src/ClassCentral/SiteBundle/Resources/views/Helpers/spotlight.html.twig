@@ -103,7 +103,7 @@
     </h2>
 
     <div class="row">
-
+        {#
         {% for position in 13..17 %}
             {% set spotlight = spotlights[position] %}
             <div class="col-xs-6 col-sm-4 col-md-3 spotlight-item-wrap {{ spotlightMap[spotlight.type].visible }}
@@ -114,7 +114,7 @@
                 <a class="spotlight-item {{ spotlightMap[spotlight.type].class }}" href="{{ spotlight.url }}"
                    onmousedown="ga('send','event','Spotlight','{{ spotlight.position }}',
                            '{% if spotlight.title %} {{ spotlight.title }} {% else %} {{ spotlight.description }} {% endif %}');"
-                        {% if spotlight.type == 5 %} rel="nofollow" {% endif %} {# sponsor links #}
+                        {% if spotlight.type == 5 %} rel="nofollow" {% endif %} {# sponsor links }
                         >
 
                     <div class="img-wrap">
@@ -139,9 +139,10 @@
                 </a>
             </div>
         {% endfor %}
+   #}
 
 
-        {#
+
         <div class="spotlight-col-aside">
           <div class="featured-media">
 
@@ -162,76 +163,32 @@
         </div>
 
         <div class="spotlight-col-main">
+            {% set postsShown = 0 %}
+            {% for post in newestPosts if postsShown < 4%}
+                {% if post.status == 'publish' %}
 
-          <div class="media-object media-object--bordered">
-            <a href="#" class="media-object__image">
-              <img src="http://placehold.it/446x305" alt="Image title" class="media-object">
-            </a>
+                    <div class="media-object media-object--bordered">
+                        <a href="{{ post.link }}" class="media-object__image">
+                            <img src="http://placehold.it/446x305" alt="Image title" class="media-object">
+                        </a>
 
-            <div class="media-object__content">
-              <h2 class="media-object__title">
-                <a href="#">MOOCWatch Feb 2016: More Students, More Price Points, <br> More Models</a>
-              </h2>
-              <div class="media-object__meta">
-                Published on Tuesday 1st March 2016
-              </div>
-            </div>
+                        <div class="media-object__content">
+                            <h2 class="media-object__title">
+                                <a href="{{ post.link }}">{{ post.title|raw }}</a>
+                            </h2>
+                            <div class="media-object__meta">
+                                {{ post.author.name }} • Published on {{ post.date|date("jS M, Y") }}
+                            </div>
+                        </div>
 
-          </div>
-
-          <div class="media-object media-object--bordered">
-            <a href="#" class="media-object__image">
-              <img src="http://placehold.it/446x305" alt="Image title" class="media-object">
-            </a>
-
-            <div class="media-object__content">
-              <h2 class="media-object__title">
-                <a href="#">MOOCWatch Feb 2016:More Students, More dfasfa afa sdfas fas af jas l</a>
-              </h2>
-              <div class="media-object__meta">
-                {% include 'ClassCentralSiteBundle:Helpers:starRating.html.twig' with {formattedRating: reviewService.formatRating(4),ratingColour: 'brightBlue'} %}
-                Review on Friday 28th February 2016
-              </div>
-            </div>
-
-          </div>
-
-          <div class="media-object media-object--bordered">
-            <a href="#" class="media-object__image">
-              <img src="http://placehold.it/446x305" alt="Image title" class="media-object">
-            </a>
-
-            <div class="media-object__content">
-              <h2 class="media-object__title">
-                <a href="#">MOOCWatch Feb 2016:More Students, More dfasfa afa sdfas fas af jas l</a>
-              </h2>
-              <div class="media-object__meta">
-                Published on Tuesday 1st March 2016
-              </div>
-            </div>
-
-          </div>
-
-          <div class="media-object media-object--bordered">
-            <a href="#" class="media-object__image">
-              <img src="http://placehold.it/446x305" alt="Image title" class="media-object">
-            </a>
-
-            <div class="media-object__content">
-              <h2 class="media-object__title">
-                <a href="#">MOOCWatch Feb 2016:More Students, More dfasfa afa sdfas fas af jas l</a>
-              </h2>
-              <div class="media-object__meta">
-                Published on Tuesday 1st March 2016
-              </div>
-            </div>
-
-          </div>
+                    </div>
+                    {% set postsShown = postsShown + 1 %}
+                {% endif %}
+            {% endfor %}
 
 
 
 
         </div>
-        #}
 
     </div>

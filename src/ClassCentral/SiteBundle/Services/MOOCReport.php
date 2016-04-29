@@ -37,7 +37,7 @@ class MOOCReport
             throw new  \Exception('Error pulling down posts');
         }
 
-        return $response->getBody(true);
+        return json_decode($response->getBody(true),true);
     }
 
 }
