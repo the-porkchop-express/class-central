@@ -144,21 +144,27 @@
 
 
         <div class="spotlight-col-aside">
-          <div class="featured-media">
 
-             <a href="#" class="featured-media__imageLink">
-               <img src="http://placehold.it/446x305" alt="Image title" class="featured-media__img">
-             </a>
 
-            <h2 class="featured-media__title">
-              <a href="">Exploring Course Structure at HarvardX: A New Year's Resolution for MOOC Research</a>
-            </h2>
-            <div class="featured-media__content">
-              One of the minds behind HarvardX shares a glimpse into how their courses are structured
-            </div>
-            <div class="featured-media__meta">
-              Published on Wednesday 2nd March 2016
-            </div>
+            {% set featuredPostShown = false %}
+            {% for post in newestPosts if featuredPostShown %}
+                {% if post.sticky %}
+                    <a href="#" class="featured-media__imageLink">
+                        <img src="http://placehold.it/446x305" alt="Image title" class="featured-media__img">
+                    </a>
+                    <div class="featured-media">
+                    <h2 class="featured-media__title">
+                      <a href="{{ post.link }}">{{ post.title }}</a>
+                    </h2>
+                    <div class="featured-media__content">
+                     {{ post.excerpt }}
+                    </div>
+                    <div class="featured-media__meta">
+                      Published on Wednesday 2nd March 2016
+                    </div>
+                {% set featuredPostShown = true %}
+                {% endif %}
+            {% endfor %}
           </div>
         </div>
 
